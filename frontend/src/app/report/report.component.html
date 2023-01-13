@@ -1,0 +1,108 @@
+<body class="container-fluid bg-dark">
+  <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button
+        data-bs-toggle="collapse"
+        data-bs-target="#menu"
+        class="navbar-toggler"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <h2 class="navbar-brand text-success">Thryve Hospital</h2>
+      <div class="navbar-collapse collapse" id="menu">
+        <ul class="navbar-nav nav">
+          <li class="nav-item">
+            <a routerLink="/cardlist" class="nav-link">Cards</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/card" class="nav-link">New Card</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dash" class="nav-link">Manage Patient</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/branch" class="nav-link">Manage Branch</a>
+          </li>
+
+          <li class="nav-item">
+            <a target="framebody" href="" class="nav-link">Report</a>
+          </li>
+          <li class="nav-item">
+            <div class="dropdown">
+              <button
+                class="btn btn-dark dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Manage Branch Manager
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" routerLink="/register">new BM</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/ulist">list of BM</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <button class="btb btn-danger" (click)="logOut()">Log out</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <hr width="100%;" color="white" size="10" />
+  <div class="row text-success d-flex">
+    <div class="col-3">Total no of card holder<br />{{ totalCard.length }}</div>
+
+    <div class="col-4">Total no of Branch<br />{{ totalbranch.length }}</div>
+    <div class="col-5">
+      Total no of patient<br />{{ totalPatient.length }}
+      <div>
+        <table class="table text-light" table-hover>
+          <thead>
+            <tr>
+              <th scope="col">Card No:</th>
+              <th scope="col">Name:</th>
+              <th scope="col">DateOfUsage:</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of totalPatient">
+              <td>{{ patient.patientCardNo }}</td>
+              <td>{{ patient.patientName }}</td>
+              <td>{{ patient.patientDateOfUsage }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr width="100%;" color="white" size="10" />
+    </div>
+  </div>
+  <!-- <hr width="30%;" color="green" size="10" />
+ <div class="row text-success">
+    <div class="col">
+      Enter card id<br />
+      <input type="text" /><button class="btn btn-success">
+        <i class="bi bi-check-circle"></i>
+      </button>
+    </div>
+
+    <div class="col">
+      Enter patient id <br /><input type="text" /><button
+        class="btn btn-success"
+      >
+        <i class="bi bi-check-circle"></i>
+      </button>
+    </div>
+    <div class="col">
+      Enter Branch id<br />
+      <input type="text" /><button class="btn btn-success">
+        <i class="bi bi-check-circle"></i>
+      </button>
+    </div>
+  </div>-->
+</body>

@@ -1,0 +1,401 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand text-success">Thryve Hospital</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button
+          class="btn btn-outline-success"
+          data-bs-toggle="modal"
+          data-bs-target="#addPatient"
+          type="submit"
+        >
+          Add Patient
+        </button>
+      </div>
+    </div>
+    <div class="navbar">
+      <button
+        type="button"
+        type="button"
+        class="btn btn-outline-success"
+        routerLink="/chairman"
+      >
+        Back
+      </button>
+    </div>
+  </nav>
+
+  <table class="table" table-hover>
+    <thead>
+      <tr>
+        <th scope="col">Id:</th>
+
+        <th scope="col">Card No:</th>
+        <th scope="col">Name:</th>
+        <th scope="col">BranchId:</th>
+        <th scope="col">branchName:</th>
+        <th scope="col">DistrictName:</th>
+        <th scope="col">StateName:</th>
+        <th scope="col">DateOfUsage:</th>
+        <th scope="col">action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of resultList">
+        <td>{{ patient.patientId }}</td>
+
+        <td>{{ patient.patientCardNo }}</td>
+        <td>{{ patient.patientName }}</td>
+        <td>{{ patient.patientBranchId }}</td>
+        <td>{{ patient.branchName }}</td>
+        <td>{{ patient.patientDistrictName }}</td>
+        <td>{{ patient.patientStateName }}</td>
+        <td>{{ patient.patientDateOfUsage }}</td>
+
+        <td>
+          <button
+            type="button"
+            class="btn btn-outline-primary me-2"
+            data-bs-toggle="modal"
+            data-bs-target="#editPatient"
+            (click)="editPatient(patient.patientId)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-pencil-square"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="deleteMe(patient.patientId)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-trash"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+              />
+            </svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add Patient Modal -->
+  <div
+    class="modal fade"
+    id="addPatient"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Add new Patient
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="patientDetails">
+            <!--<div class="mb-3">
+              <label for="patientTransectionId" class="form-label"
+                >TransectionId</label
+              >
+              <input
+                type="number"
+                formControlName="patientTransectionId"
+                class="form-control"
+                id="patientTransectionId"
+              />
+            </div>-->
+            <div class="mb-3">
+              <label for="patientCardNo" class="form-label">CardNo </label>
+              <input
+                type="text"
+                formControlName="patientCardNo"
+                class="form-control"
+                id="patientCardNo"
+              />
+              <button (click)="checkCard()">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-search"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                  />
+                </svg>
+              </button>
+              <div *ngIf="bool1" class="text-success">
+                Valid Card id<span
+                  ><i class="bi bi-check text-success"></i
+                ></span>
+              </div>
+              <div *ngIf="bool2" class="text-danger">In-Valid Card id</div>
+            </div>
+            <!-- <div class="mb-3">
+              <label for="patientBranchId" class="form-label">BranchId </label>
+              <input
+                type="number"
+                formControlName="patientBranchId"
+                class="form-control"
+                id="patientBranchId"
+                [ngModel]="bid"
+              />
+            </div>-->
+            <div class="mb-3">
+              <label for="branchName" class="form-label">Branch Name</label>
+              <input
+                type="text"
+                formControlName="branchName"
+                class="form-control"
+                id="branchName"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientName" class="form-label">Patient Name</label>
+              <input
+                type="text"
+                formControlName="patientName"
+                class="form-control"
+                id="patientName"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientDistrictName" class="form-label"
+                >District Name</label
+              >
+              <input
+                type="text"
+                formControlName="patientDistrictName"
+                class="form-control"
+                id="patientDistrictName"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientStateName" class="form-label"
+                >State Name
+              </label>
+              <input
+                type="text"
+                formControlName="patientStateName"
+                class="form-control"
+                id="patientStateName"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientDateOfUsage" class="form-label"
+                >DateOfUsage
+              </label>
+              <input
+                type="Date"
+                formControlName="patientDateOfUsage"
+                class="form-control"
+                id="patientDateOfUsage"
+              />
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-success"
+                (click)="addPatient()"
+                data-bs-dismiss="modal"
+                [disabled]="bool2"
+              >
+                save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--edit patient Modal -->
+  <div
+    class="modal fade"
+    id="editPatient"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            edit Patient Details
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="patientDetails">
+            <div class="mb-3">
+              <label for="patientTransectionId" class="form-label"
+                >TransectionId</label
+              >
+              <input
+                type="number"
+                formControlName="patientTransectionId"
+                class="form-control"
+                id="patientTransectionId"
+                [(ngModel)]="patient.patientTransectionId"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientCardNo" class="form-label">CardNo </label>
+              <input
+                type="text"
+                formControlName="patientCardNo"
+                class="form-control"
+                id="patientCardNo"
+                [(ngModel)]="patient.patientCardNo"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientBranchId" class="form-label">BranchId </label>
+              <input
+                type="text"
+                formControlName="patientBranchId"
+                class="form-control"
+                id="patientBranchId"
+                [(ngModel)]="patient.patientBranchId"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="branchName" class="form-label">Branch Name</label>
+              <input
+                type="text"
+                formControlName="branchName"
+                class="form-control"
+                id="branchName"
+                [(ngModel)]="patient.branchName"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientName" class="form-label">Patient Name</label>
+              <input
+                type="text"
+                formControlName="patientName"
+                class="form-control"
+                id="patientName"
+                [(ngModel)]="patient.patientName"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientDistrictName" class="form-label"
+                >District Name</label
+              >
+              <input
+                type="text"
+                formControlName="patientDistrictName"
+                class="form-control"
+                id="patientDistrictName"
+                [(ngModel)]="patient.patientDistrictName"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientStateName" class="form-label"
+                >State Name
+              </label>
+              <input
+                type="text"
+                formControlName="patientStateName"
+                class="form-control"
+                id="patientStateName"
+                [(ngModel)]="patient.patientStateName"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientDateOfUsage" class="form-label"
+                >DateOfUsage
+              </label>
+              <input
+                type="text"
+                formControlName="patientDateOfUsage"
+                class="form-control"
+                id="patientDateOfUsage"
+                [(ngModel)]="patient.patientDateOfUsage"
+              />
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-success"
+                data-bs-dismiss="modal"
+                (click)="updateMe()"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

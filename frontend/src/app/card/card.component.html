@@ -1,0 +1,285 @@
+<div class="col">
+  <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button
+        data-bs-toggle="collapse"
+        data-bs-target="#menu"
+        class="navbar-toggler"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <h2 class="navbar-brand text-success">Thryve Hospital</h2>
+      <div class="navbar-collapse collapse" id="menu">
+        <ul class="navbar-nav nav">
+          <li class="nav-item">
+            <a routerLink="/cardlist" class="nav-link">Cards</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/card" class="nav-link">New Card</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dash" class="nav-link">Manage Patient</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/branch" class="nav-link">Manage Branch</a>
+          </li>
+
+          <li class="nav-item">
+            <a target="framebody" href="/report" class="nav-link">Report</a>
+          </li>
+          <li class="nav-item">
+            <div class="dropdown">
+              <button
+                class="btn btn-dark dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Manage Branch Manager
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" routerLink="/register">new BM</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/ulist">list of BM</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <button class="btb btn-danger" (click)="logOut()">Log out</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <body class="container-fluid bg-primery mx-auto d-grid gap-3">
+    <div class="bod">
+      <div
+        *ngIf="alert"
+        class="alert alert-success alert-dismissible fade show border p-3 rounded-3"
+        role="alert"
+      >
+        <strong>Success !</strong> Your data as been entered
+        succesfully...................................
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+          (click)="closeAlert()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="formvalue" class="row g-3">
+        <h2 class="d-flex justify-content-center bg-dark text-secondary">
+          Health Card
+        </h2>
+        <div class="col-md-4">
+          <label>Enter name</label>
+          <input
+            type="text"
+            formControlName="cardHolderName"
+            form-label
+            placeholder="eg. d roul"
+          />
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="cardHolderName!.invalid && cardHolderName!.touched"
+        >
+          <span *ngIf="cardHolderName!.errors!.required">Name Required</span>
+        </div>
+
+        <div class="col-md-8 pt-4">
+          <label>Enter mobile number</label>
+          <input
+            type="number"
+            formControlName="mobile"
+            required
+            placeholder="8984..."
+            class="form-label"
+          />
+          <div class="text-danger" *ngIf="mobile!.invalid && mobile!.touched">
+            <span *ngIf="mobile!.errors!.pattern">phone no is not valid</span>
+            <span *ngIf="mobile!.errors!.required">mobile is required</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label>Enter email</label>
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="pqr@gmail.com"
+          />
+          <div
+            *ngIf="email!.invalid && (email!.dirty || email!.touched)"
+            class="alert alert-danger"
+          >
+            <span *ngIf="email!.errors!.required">email is required</span>
+            <span *ngIf="email!.errors!.email">email is not valid</span>
+          </div>
+        </div>
+        <div class="col-md-8 pt-4">
+          <label>Choose type of card</label>
+          <select type="text" formControlName="type">
+            <option>Silver</option>
+            <option>Gold</option>
+            <option>Platinum</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label>Enter limit</label>
+          <input type="number" formControlName="limit" placeholder="100000" />
+        </div>
+        <div class="col-md-8">
+          <label>Enter duration</label>
+          <input type="date" formControlName="validUpTo" />
+        </div>
+        <div class="col-md-4">
+          <label>Enter family members</label>
+          <input type="number" formControlName="members" placeholder="2" />
+        </div>
+        <br />
+        <!--  <button
+        class="p-2 bg-light border"
+        type="button"
+        class="btn btn-primary"
+        (click)="saveFamily()"
+      >
+        Add</button
+      ><br />
+      <button type="button" class="btn btn-primary" (click)="getDetails()">
+        Get
+      </button>-->
+        <!--  <div *ngFor="let i of card">
+        {{ i?.id }},{{ i?.name }},{{ i?.mob }},{{ i?.email }}
+      </div>-->
+      </form>
+      <div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Add family details
+        </button>
+
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  family Member
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="formvalues">
+                  <div class="mb-3">
+                    <label for="ralation" class="form-label">Relation</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ralation"
+                      formControlName="relation"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Full name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="name"
+                      id="name"
+                    />
+                  </div>
+                  <div class="mb-3 form-check">
+                    <label for="age" class="form-label">age</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="age"
+                      id="age"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    (click)="addFamily()"
+                  >
+                    Add
+                  </button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="addFamily()"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  <div *ngFor="let f of family">
+      {{ f.relation }},{{ f.fullname }},{{ f.age }}
+    </div>
+    <button type="button" class="btn btn-primary" (click)="subMe()">
+      Submit
+    </button>-->
+      <table class="table table-success table-striped">
+        <tr>
+          <th>Relation</th>
+          &nbsp;
+          <th>Name</th>
+          &nbsp;
+          <th>Age</th>
+        </tr>
+        <tr *ngFor="let f of family; let i = index">
+          <td>{{ f.relation }}</td>
+          &nbsp;
+          <td>{{ f.name }}</td>
+          &nbsp;
+          <td>{{ f.age }}</td>
+          <span
+            ><button type="button" class="btn btn-danger" (click)="deleteMe(i)">
+              remove
+            </button></span
+          >
+        </tr>
+      </table>
+      <button type="button" class="btn btn-success pl-10" (click)="submitMe()">
+        Submit
+      </button>
+    </div>
+  </body>
+</div>

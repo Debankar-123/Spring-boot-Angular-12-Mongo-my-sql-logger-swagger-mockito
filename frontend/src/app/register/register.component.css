@@ -1,0 +1,22 @@
+.container-fluid {
+  background-image: url(src\assets\Images\register.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
+  /* height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+label {
+  color: black;
+  font-size: 18px;
+  font-weight: 600;
+}
+form {
+  width: 500px;
+}
+.user-rol {
+  color: black !important;
+  font-weight: 600;
+  font-size: 18px;
+}

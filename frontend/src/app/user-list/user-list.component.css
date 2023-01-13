@@ -1,0 +1,26 @@
+section {
+  background-color: rgb(179, 176, 176);
+}
+.upd-btn {
+  background-color: cadetblue;
+}
+h1 {
+  font-weight: 600;
+}
+.btn-ud {
+  width: 90%;
+}
+.user-id {
+  font-weight: 600;
+  margin-right: 10%;
+  font-size: 18px;
+}
+.user-elem {
+  font-size: 15px;
+  background-color: #818380;
+}
+label {
+  color: black;
+  font-weight: 600;
+  font-size: 15px;
+}

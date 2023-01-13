@@ -1,0 +1,187 @@
+<div class="col">
+  <div class="container">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title><i>HEALTH CARD</i></mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="row g-3">
+        <b
+          ><span class="col-md-6">Name:-{{ obj.cardHolderName }}</span></b
+        >
+        <b>
+          <span class="col-md-6">Card id:-{{ obj.cardNo }}</span></b
+        ><br />
+        <span class="col-md-6">Card limit:-{{ obj.limit }}</span
+        ><br />
+        <span class="col-md-6">Valid up-to:-{{ obj.validUpTo }}</span>
+        <button class="btn btn-success" (click)="showFamily()">
+          Swow Member
+        </button>
+        <div *ngIf="bool">
+          <div>
+            <table class="table table-success table-striped">
+              <tr class="text-secondary">
+                <th>Relation</th>
+                &nbsp;
+                <th>Name</th>
+                &nbsp;
+                <th>Age</th>
+              </tr>
+              <tr
+                *ngFor="let f of obj.familyMembers; let i = index"
+                class="text-secondary"
+              >
+                <td>{{ f.relation }}</td>
+                &nbsp;
+                <td>{{ f.name }}</td>
+                &nbsp;
+                <td>{{ f.age }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          class="btn btn-danger"
+          mat-stroked-button
+          color="warn"
+          routerLink="/carddetails"
+          (click)="deleteMe(obj.cardNo)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-trash"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+            />
+          </svg>
+        </button>
+        <!--  <button
+        class="btn btn-primery"
+        mat-stroked-button
+        color="warn"
+        routerLink="/carddetails"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        (click)="setFormvalue()"
+      >
+        update
+      </button>-->
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Health Card</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formvalue" class="row g-3">
+            <div>
+              <label>Enter name</label>
+              <input
+                type="text"
+                formControlName="cardHolderName"
+                form-label
+                [(ngModel)]="cDetails.cardHolderName"
+              />
+            </div>
+
+            <div>
+              <label>Enter mobile number</label>
+              <input
+                type="number"
+                formControlName="mobile"
+                required
+                class="form-label"
+                [(ngModel)]="cDetails.mobile"
+              />
+            </div>
+
+            <div>
+              <label>Enter email</label>
+              <input
+                type="email"
+                formControlName="email"
+                [(ngModel)]="cDetails.email"
+              />
+            </div>
+            <div>
+              <label>Choose type of card</label>
+              <select
+                type="text"
+                formControlName="type"
+                [(ngModel)]="cDetails.type"
+              >
+                <option>Silver</option>
+                <option>Gold</option>
+                <option>Platinum</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Enter limit</label>
+              <input
+                type="number"
+                formControlName="limit"
+                [(ngModel)]="cDetails.limit"
+              />
+            </div>
+            <div>
+              <label>Enter duration</label>
+              <input
+                type="date"
+                formControlName="validUpTo"
+                [(ngModel)]="cDetails.validUpTo"
+              />
+            </div>
+            <div>
+              <label>Enter family members</label>
+              <input
+                type="number"
+                formControlName="members"
+                [(ngModel)]="cDetails.members"
+              />
+            </div>
+            <br />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" (click)="updateMe()">
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="col">
+  <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button
+        data-bs-toggle="collapse"
+        data-bs-target="#menu"
+        class="navbar-toggler"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <h2 class="navbar-brand text-success">Thryve Hospital</h2>
+      <div class="navbar-collapse collapse" id="menu">
+        <ul class="navbar-nav nav">
+          <li class="nav-item">
+            <a routerLink="/cardlist" class="nav-link">Cards</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/card" class="nav-link">New Card</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dash" class="nav-link">Manage Patient</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/branch" class="nav-link">Manage Branch</a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="/report" class="nav-link">Report</a>
+          </li>
+          <li class="nav-item">
+            <div class="dropdown">
+              <button
+                class="btn btn-dark dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Manage Branch Manager
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" routerLink="/register">new BM</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/ulist">list of BM</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <button class="btb btn-danger" (click)="logOut()">Log out</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <!--<p>total HealthCard:-{{ AllHealthCard.length }}</p>-->
+    <div
+      *ngFor="
+        let card of AllHealthCard
+          | paginate : { itemsPerPage: 2, currentPage: p }
+      "
+    >
+      <mat-list-item>
+        <app-card-details [obj]="card"></app-card-details> </mat-list-item
+      ><br />
+    </div>
+    <pagination-controls
+      (pageChange)="p = $event"
+      class="float-right"
+    ></pagination-controls>
+  </div>
+</div>

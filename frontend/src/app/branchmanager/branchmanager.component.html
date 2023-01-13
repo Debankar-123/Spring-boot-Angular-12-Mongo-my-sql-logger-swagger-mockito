@@ -1,0 +1,111 @@
+<body class="container-fluid bg-dark">
+  <header class="mt-1">
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button
+          data-bs-toggle="collapse"
+          data-bs-target="#menu"
+          class="navbar-toggler"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <h2 class="navbar-brand text-success">Thryve Hospital</h2>
+        <div class="navbar-collapse collapse" id="menu">
+          <ul class="navbar-nav nav">
+            <li class="nav-item">
+              <a routerLink="/cardlist" class="nav-link">Cards</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/card" class="nav-link">New Card</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/managerpatient" class="nav-link"
+                >Manage Patient</a
+              >
+            </li>
+
+            <!--<li class="nav-item">
+              <a routerLink="" class="nav-link">Report</a>
+            </li>
+             <li class="nav-item">
+              <div class="dropdown">
+                <button
+                  class="btn btn-dark dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Manage Branch Manager
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="/register">new BM</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/ulist">list of BM</a>
+                  </li>
+                </ul>
+              </div>
+            </li>-->
+            <li class="nav-item">
+              <button class="btb btn-danger" (click)="logOut()">Log out</button>
+            </li>
+            <li>
+              <h2 class="text-success">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!Hello Manager (-^-)
+              </h2>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container-fluid">
+    <div
+      class="carousel slide carousel-dark"
+      id="banner"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="..\assets\image\img\slide1.jpg" class="d-block w-100" />
+        </div>
+        <div class="carousel-item">
+          <img src="..\assets\image\img\slide2.jpg" class="d-block w-100" />
+        </div>
+        <div class="carousel-item">
+          <img src="..\assets\image\img\slide3.jpg" class="d-block w-100" />
+        </div>
+        <div class="carousel-item">
+          <img src="..\assets\image\img\slide4.jpg" class="d-block w-100" />
+        </div>
+      </div>
+      <div>
+        <button
+          data-bs-target="#banner"
+          data-bs-slide="prev"
+          class="carousel-control-prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button
+          data-bs-target="#banner"
+          data-bs-slide="next"
+          class="carousel-control-next"
+        >
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+      <div class="carousel-indicators">
+        <button
+          class="active"
+          data-bs-slide-to="0"
+          data-bs-target="#banner"
+        ></button>
+        <button data-bs-slide-to="1" data-bs-target="#banner"></button>
+        <button data-bs-slide-to="2" data-bs-target="#banner"></button>
+        <button data-bs-slide-to="3" data-bs-target="#banner"></button>
+      </div>
+    </div>
+  </div>
+</body>

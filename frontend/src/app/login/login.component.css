@@ -1,0 +1,30 @@
+.container-fluid {
+  background-image: url(src\assets\images\img3.jpeg);
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+label {
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+}
+form {
+  width: 500px;
+}
+h1 {
+  text-align: center;
+  color: white;
+  margin-bottom: 0px !important;
+  padding: 2% 0%;
+  font-size: 40px;
+}
+
+/* .eye{
+    right: 7px;
+    bottom: 30px;
+    position: relative;
+} */

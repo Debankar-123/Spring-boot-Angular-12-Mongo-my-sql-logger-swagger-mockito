@@ -1,0 +1,209 @@
+<div>
+  <header class="mt-1">
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button
+          data-bs-toggle="collapse"
+          data-bs-target="#menu"
+          class="navbar-toggler"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <h2 class="navbar-brand text-success">Thryve Hospital</h2>
+        <div class="navbar-collapse collapse" id="menu">
+          <ul class="navbar-nav nav">
+            <li class="nav-item">
+              <a routerLink="/cardlist" class="nav-link">Cards</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/card" class="nav-link">New Card</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/dash" class="nav-link">Manage Patient</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/branch" class="nav-link">Manage Branch</a>
+            </li>
+
+            <li class="nav-item">
+              <a routerLink="/report" class="nav-link">Report</a>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                <button
+                  class="btn btn-dark dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Manage Branch Manager
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="/ulist">list of BM</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <button class="btb btn-danger" (click)="logOut()">Log out</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+<div class="container-fluid">
+  <div
+    *ngIf="alert"
+    class="alert alert-success alert-dismissible fade show border p-3 rounded-3"
+    role="alert"
+  >
+    <strong>Success !</strong> Your data as been entered
+    succesfully...................................
+    <button
+      (click)="closeAlert()"
+      type="button"
+      class="close"
+      data-dismiss="alert"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="registerSubmited()"
+    class="border p-3 rounded-3"
+  >
+    <div class="row g-0">
+      <div class="col text-center p-2 mb-3 bg-dark">
+        <span class="fs-3 text-white">New Branch manager</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="userName"
+        />
+        <div
+          class="form-text text-danger"
+          *ngIf="Name.errors?.['required']&&(Name.touched || Name.dirty)"
+        >
+          Name Required.
+        </div>
+        <div
+          class="form-text text-danger"
+          *ngIf="Name.errors?.['minlength']&&(Name.touched || Name.dirty)"
+        >
+          Name is to short.
+        </div>
+        <div
+          class="form-text text-danger"
+          *ngIf="Name.errors?.['pattern']&&(Name.touched || Name.dirty)"
+        >
+          Name should start with alphabet.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+        />
+        <div class="form-text"></div>
+        <div
+          class="form-text text-danger"
+          *ngIf="Email.errors?.['required']&&(Email.touched || Email.dirty)"
+        >
+          Email is Required.
+        </div>
+        <div
+          class="form-text text-danger"
+          *ngIf="Email.errors?.['email']&&(Email.touched || Email.dirty)"
+        >
+          Email is invalid.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mb-3">
+        <label for="pwd" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="pwd"
+          formControlName="password"
+        />
+        <div class="form-text"></div>
+      </div>
+      <div
+        class="form-text text-danger"
+        *ngIf="Password.errors?.['required'] && (Password.touched || Password.dirty)"
+      >
+        Password is Required.
+      </div>
+      <div
+        class="form-text text-danger"
+        *ngIf="Password.errors?.['minlength'] || Password.errors?.['maxlength'] && (Password.touched || Password.dirty)"
+      >
+        Password should be atleast 8 and max 15 characters long.
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mb-3">
+        <div class="m-1 user-rol">Select User Role</div>
+        <div class="form-check form-check-inline">
+          <input
+            type="radio"
+            class="form-check-input"
+            value="chairmaan"
+            id="chairmaan"
+            formControlName="role"
+          />
+          <label class="form-check-label text-info" for="chairmaan"
+            >Chairman
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            type="radio"
+            class="form-check-input"
+            value="manager"
+            id="branchmanager"
+            formControlName="role"
+          />
+          <label class="form-check-label text-info" for="branchmanager"
+            >Manager
+          </label>
+        </div>
+        <div class="form-text text-danger" *ngIf="Role.errors?.['required']">
+          Role is required.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 offset-3">
+        <div class="d-grid">
+          <button
+            type="submit"
+            [disabled]="registerForm.invalid"
+            class="btn btn-primary"
+            (click)="registerSubmited()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

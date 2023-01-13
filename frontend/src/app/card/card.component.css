@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-image: url();
+}
+.bod {
+  margin-left: 25%;
+  margin-right: 30%;
+  margin-bottom: 20%;
+
+  padding-bottom: 5%;
+  background-color: rgb(216, 234, 247);
+  border: 5px solid black;
+}
+input {
+  margin-left: 2px;
+  margin-top: 4px;
+}
+.col {
+  background-color: rgb(220, 244, 245);
+}
